@@ -14,7 +14,7 @@ public class Main {
         Map<String, List<Integer>> positions = new HashMap<>();
         Map<String, Integer> totalGames = new HashMap<>();
         
-        String[] characterNames = {"Phoebe", "Sigrika", "Hiyuki", "Carthethyia", "Luuk Herssen", "Denia", "Abbowser"};
+        String[] characterNames = {"Chisa", "Mornye", "Lynae", "Aemeath", "Shorekeeper", "Carlotta", "Abbowser"};
         for (String name : characterNames) {
             winCounts.put(name, 0);
             positions.put(name, new ArrayList<>());
@@ -27,12 +27,13 @@ public class Main {
             
             // Charaktere hinzufügen
             // Option 1: Am Startfeld (Feld 1) mit zufälligem Stack-Platz
-            game.addCharacterAtStart(new Phoebe(), true);
-            game.addCharacterAtStart(new Sigrika(), true);
-            game.addCharacterAtStart(new Hiyuki(), true);
-            game.addCharacterAtStart(new Carthethyia(), true);
-            game.addCharacterAtStart(new LuukHerssen(), true);
-            game.addCharacterAtStart(new Denia(), true);
+            // wichtig: characterNames müssen mit den tatsächlichen Charakterklassen übereinstimmen!!!
+            game.addCharacterAtStart(new Chisa(), true);
+            game.addCharacterAtStart(new Mornye(), true);
+            game.addCharacterAtStart(new Lynae(), true);
+            game.addCharacterAtStart(new Aemeath(), true);
+            game.addCharacterAtStart(new Shorekeeper(), true);
+            game.addCharacterAtStart(new Carlotta(), true);
             game.addCharacterAtStart(new Abbowser(), true);
             
             // Option 2: Spezifische Positionen setzen (Beispiele):
