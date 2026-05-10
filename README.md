@@ -59,6 +59,12 @@ game.addCharacterAtStart(new MeinCharakter(), true);
 
 #### Originalcharaktere
 
+### 🎭 Abbowser (der Antagonist)
+- **Besonderheit**: Bewegt sich rückwärts (ab Runde 3!)
+- **Start**: Feld 32 (das Ziel)
+- **Spezial**: Kann sich teleportieren, wenn allein
+- **Rolle**: Verhindert, dass andere einfach vorbeigehen
+
 ### 🌙 Phoebe
 - **Fähigkeit**: 50% Chance für +1 zusätzliches Feld pro Zug
 - **Strategie**: Konstant und verlässlich mit guter Zusatzchance
@@ -86,16 +92,6 @@ game.addCharacterAtStart(new MeinCharakter(), true);
   - Vorschubmechanismus: +2 Felder (statt +1)
   - Hemmmechanismus: -1 Feld (statt normal)
 - **Strategie**: Spezialist für Feldinteraktionen
-
-### 🎭 Abbowser (der Antagonist)
-- **Besonderheit**: Bewegt sich rückwärts (ab Runde 3!)
-- **Start**: Feld 32 (das Ziel)
-- **Spezial**: Kann sich teleportieren, wenn allein
-- **Rolle**: Verhindert, dass andere einfach vorbeigehen
-
----
-
-#### Zusätzliche Charaktere
 
 ### 📖 Aemeath
 - **Fähigkeit**: Einmal pro Spiel - Teleportation auf den Stapel des nächsten Charakters
