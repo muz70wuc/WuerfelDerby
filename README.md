@@ -57,6 +57,8 @@ game.addCharacterAtStart(new MeinCharakter(), true);
 
 ### Vorhandene Charaktere
 
+#### Originalcharaktere
+
 ### 🌙 Phoebe
 - **Fähigkeit**: 50% Chance für +1 zusätzliches Feld pro Zug
 - **Strategie**: Konstant und verlässlich mit guter Zusatzchance
@@ -90,6 +92,38 @@ game.addCharacterAtStart(new MeinCharakter(), true);
 - **Start**: Feld 32 (das Ziel)
 - **Spezial**: Kann sich teleportieren, wenn allein
 - **Rolle**: Verhindert, dass andere einfach vorbeigehen
+
+---
+
+#### Zusätzliche Charaktere
+
+### 📖 Aemeath
+- **Fähigkeit**: Einmal pro Spiel - Teleportation auf den Stapel des nächsten Charakters
+- **Bedingung**: Ab Feldmitte (Feld 16+) und wenn ein anderer Charakter vor ihm ist
+- **Strategie**: Taktischer Sprung nach vorne in der Spielmitte
+
+### 🎪 Carlotta
+- **Fähigkeit**: 28% Chance, die Bewegung zu verdoppeln
+- **Strategie**: Moderate Boosts mit guter Erfolgsrate
+
+### 🎯 Chisa
+- **Fähigkeit**: +2 Felder, wenn die kleinste Würfelzahl der Runde gewürfelt wird
+- **Strategie**: Profit aus der Schwäche wird zur Stärke
+
+### 🎲 Lynae
+- **Fähigkeit**: Unterschiedliche Chancen pro Zug:
+  - 60% Chance für doppelte Bewegung
+  - 20% Chance für keine Bewegung
+  - 20% Chance für normale Bewegung
+- **Strategie**: Hochriskant mit großem Upside-Potenzial
+
+### 🔢 Mornye
+- **Fähigkeit**: Feste Bewegungsabfolge (3 → 2 → 1 → 3 → 2 → 1 ...)
+- **Strategie**: Vorhersehbar und konsistent, nicht vom Glück abhängig
+
+### 🌊 Shorekeeper
+- **Fähigkeit**: Würfelt immer 2 oder 3 (50/50 Chance)
+- **Strategie**: Zuverlässig, mittelmäßig, stabil
 
 ---
 
