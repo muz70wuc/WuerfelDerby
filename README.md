@@ -362,20 +362,4 @@ src/main/java/wuwa/cheat/
 
 ---
 
-## 💡 Tipps & Tricks
-
-1. **Stack-Effekt**: Ein starker Charakter oben auf einem schwachen kann diesem großen Vorteil geben!
-2. **Sigrika nutzen**: Ihre Markierungsfähigkeit ist sehr mächtig - positioniere sie strategisch
-3. **Abbowser vermeiden**: Versuche, nicht mit Abbowser zusammen gestapelt zu werden
-4. **Feldeffekte**: Luuk Herssen profitiert stark von Spezialfeldern
-5. **Denia**: Braucht Glück mit Würfelwiederholungen - sehr variabel
-
----
-
-## 📄 Lizenz
-
-Dieses Projekt ist ein Lernprojekt für die Universität.
-
----
-
 **Viel Spaß beim Spielen! 🎲🏁**
