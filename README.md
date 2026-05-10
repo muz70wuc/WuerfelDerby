@@ -17,7 +17,7 @@ Ein Java-basiertes Simulationsspiel, bei dem verschiedene Charaktere mit speziel
 
 ---
 
-## 🎮 Spielkonzept
+## Spielkonzept
 
 Das Würfelderby ist ein Rennspiel über ein 32-Feld-Spielbrett, bei dem:
 
@@ -30,7 +30,7 @@ Das Würfelderby ist ein Rennspiel über ein 32-Feld-Spielbrett, bei dem:
 
 ---
 
-## 🦸 Charaktere & Fähigkeiten
+## Charaktere & Fähigkeiten
 
 ### Neue Charaktere hinzufügen
 
@@ -123,7 +123,7 @@ game.addCharacterAtStart(new MeinCharakter(), true);
 
 ---
 
-## ⚙️ Spielmechaniken
+## Spielmechaniken
 
 ### 1. **Rundenablauf**
 ```
@@ -153,7 +153,7 @@ Runde 2+: Normale Runden
 
 ---
 
-## 🏁 Feldtypen (8 Spezialfelder)
+## Feldtypen
 
 Das 32-Feld-Spielbrett hat 8 Spezialfelder:
 
@@ -175,7 +175,7 @@ Das 32-Feld-Spielbrett hat 8 Spezialfelder:
 
 ---
 
-## 🖥️ Installation & Ausführung
+## Installation & Ausführung
 
 ### Voraussetzungen
 - Java 21 oder höher
@@ -206,7 +206,7 @@ java -cp build/classes/java/main wuwa.cheat.Main
 
 ---
 
-## 📖 Verwendung
+## Verwendung
 
 ### Basis-Simulation (Zufällige Anfangspositionen)
 
@@ -253,7 +253,7 @@ phoebe.setVerticalPosition(2);   // Ebene 2 im Stack
 
 ---
 
-## 📍 Anfangspositionen
+## Anfangspositionen
 
 ### addCharacterAtStart(Person, boolean randomizeVerticalLevel)
 - `randomizeVerticalLevel = true`: Zufälliger Stack-Platz (Ebene 0 bis Charakteranzahl-1)
@@ -280,7 +280,7 @@ game.addCharacter(new Hiyuki(), 10, 0);  // Feld 10, Level 0
 
 ---
 
-## 📊 Ausgabe & Statistiken
+## Ausgabe & Statistiken
 
 Nach der Simulation erhältst du drei Statistik-Tabellen:
 
