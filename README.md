@@ -1,6 +1,6 @@
 # 🎲 Würfelderby - Ein Rennspiel der besonderen Art
 
-Ein Java-basiertes Simulationsspiel, bei dem 7 unterschiedliche Charaktere mit speziellen Fähigkeiten um die Wette laufen. Das Spiel simuliert Tausende von Runden, um die Gewinnwahrscheinlichkeiten zu berechnen.
+Ein Java-basiertes Simulationsspiel, bei dem verschiedene Charaktere mit speziellen Fähigkeiten um die Wette laufen. Das Spiel simuliert Tausende von Runden, um die Gewinnwahrscheinlichkeiten zu berechnen. Die Anzahl der Spieler kann frei konfiguriert werden, und neue Charaktere lassen sich leicht durch neue Klassen hinzufügen.
 
 ---
 
@@ -21,16 +21,41 @@ Ein Java-basiertes Simulationsspiel, bei dem 7 unterschiedliche Charaktere mit s
 
 Das Würfelderby ist ein Rennspiel über ein 32-Feld-Spielbrett, bei dem:
 
-- **7 Charaktere** gleichzeitig laufen
+- **Beliebig viele Charaktere** gleichzeitig laufen (Anzahl pro Runde konfigurierbar)
 - Jeder Charakter eine **einzigartige Spezialfähigkeit** hat
 - Die Charaktere sich gegenseitig **stapeln** können (Stack-Mechanik)
 - Zufallselemente (Würfelwürfe) das Spiel beeinflussen
 - Das erste Nicht-Abbowser-Charakter-Ziel am Feld 32 gewinnt
-- Das Spiel **1000x simuliert** wird, um Statistiken zu sammeln
+- Das Spiel **mehrfach simuliert** wird, um Statistiken zu sammeln
 
 ---
 
 ## 🦸 Charaktere & Fähigkeiten
+
+### Neue Charaktere hinzufügen
+
+Um neue Charaktere zum Spiel hinzuzufügen, erstelle eine neue Klasse, die von `Person` erbt:
+
+```java
+public class MeinCharakter extends Person {
+    public MeinCharakter() {
+        super("Mein Charakter", "Beschreibung");
+    }
+    
+    @Override
+    public void doSpecialAbility(WuerfelDerby game) {
+        // Spezialfähigkeit implementieren
+    }
+}
+```
+
+Danach kann der Charakter wie jeder andere zum Spiel hinzugefügt werden:
+
+```java
+game.addCharacterAtStart(new MeinCharakter(), true);
+```
+
+### Vorhandene Charaktere
 
 ### 🌙 Phoebe
 - **Fähigkeit**: 50% Chance für +1 zusätzliches Feld pro Zug
