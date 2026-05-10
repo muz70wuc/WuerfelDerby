@@ -339,4 +339,50 @@ public class WuerfelDerby {
             System.out.println(person);
         }
     }
+    
+    /**
+     * Findet den nächstgelegenen Würfel vor einem gegebenen Würfel
+     * @param person Der Würfel, dessen Vordermann gesucht wird
+     * @return Der nächstgelegene Würfel vor der Person, oder null wenn keiner vorhanden
+     */
+    public Person getNearestPersonInFront(Person person) {
+        Person nearest = null;
+        int minDistance = Integer.MAX_VALUE;
+        
+        for (Person p : allCharacters) {
+            if (p.equals(person)) continue;
+            if (p.getPosition() <= person.getPosition()) continue;  // Nur die, die weiter vorne sind
+            
+            int distance = p.getPosition() - person.getPosition();
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearest = p;
+            }
+        }
+        
+        return nearest;
+    }
+    
+    /**
+     * Überprüft, ob ein Würfelergebnis das kleinste dieser Runde ist
+     * @param roll Das zu überprüfende Würfelergebnis
+     * @param person Die Person, die das Ergebnis würfelte
+     * @return true wenn dieser Roll das kleinste dieser Runde ist
+     */
+    public boolean isSmallestRollThisRound(int roll, Person person) {
+        for (Person p : allCharacters) {
+            if (p.equals(person)) continue;
+            if (p.getLastDiceRoll() < roll) {
+                return false;  // Es gibt einen kleineren Roll
+            }
+        }
+        // Überprüfe, dass nicht alle den gleichen Roll haben (Tie-Breaker)
+        for (Person p : allCharacters) {
+            if (p.equals(person)) continue;
+            if (p.getLastDiceRoll() < roll) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
