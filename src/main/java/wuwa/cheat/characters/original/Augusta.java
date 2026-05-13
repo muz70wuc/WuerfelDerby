@@ -1,10 +1,14 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
+
+import wuwa.cheat.characters.abilities.ActOrderModifier;
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Augusta: Befindet sich der Würfel zu Beginn der Runde ganz oben im Stapel,
  * setzt er in dieser Runde aus und handelt in der nächsten Runde zuletzt.
+ * Implementiert ActOrderModifier
  */
-public class Augusta extends Person {
+public class Augusta extends Person implements ActOrderModifier {
     private boolean skippedThisRound = false;
     private boolean shouldActLast = false;
     
@@ -44,5 +48,10 @@ public class Augusta extends Person {
     
     public boolean shouldActLast() {
         return this.shouldActLast;
+    }
+    
+    @Override
+    public boolean shouldSkipTurn() {
+        return this.skippedThisRound;
     }
 }

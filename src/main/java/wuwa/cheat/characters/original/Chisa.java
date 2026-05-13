@@ -1,4 +1,6 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
+
+import wuwa.cheat.game.WuerfelDerby;
 
 public class Chisa extends Person {
     

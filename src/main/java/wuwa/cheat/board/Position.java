@@ -1,4 +1,4 @@
-package wuwa.cheat;
+package wuwa.cheat.board;
 
 public class Position {
     private int fieldNumber;  // 1-32

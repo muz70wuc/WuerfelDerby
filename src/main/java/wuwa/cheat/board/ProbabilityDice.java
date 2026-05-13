@@ -1,4 +1,4 @@
-package wuwa.cheat;
+package wuwa.cheat.board;
 
 import java.util.Random;
 

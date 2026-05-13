@@ -1,6 +1,8 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.Random;
+
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Denia: Wenn dieselbe Augenzahl wie beim letzten Wurf erzielt wird, +2 Felder.

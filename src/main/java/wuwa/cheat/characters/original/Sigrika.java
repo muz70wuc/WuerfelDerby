@@ -1,8 +1,10 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Sigrika: Nach jeder Runde werden bis zu zwei direkt vor ihr platzierte Würfel markiert

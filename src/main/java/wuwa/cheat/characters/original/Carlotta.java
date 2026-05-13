@@ -1,15 +1,20 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
-public class Shorekeeper extends Person {
+import wuwa.cheat.game.WuerfelDerby;
+
+public class Carlotta extends Person {
     
-    public Shorekeeper() {
-        super("Shorekeeper");
+    public Carlotta() {
+        super("Carlotta");
     }
     
     @Override
     public int applySpecialAbility(int baseMovement, java.util.Random random, WuerfelDerby game) {
-        // Shorekeeper: Die Augenzahl ergibt immer 2 oder 3
-        return random.nextBoolean() ? 2 : 3;
+        // Carlotta: 28% Chance, mit der gewürfelten Zahl zweimal vorzurücken
+        if (random.nextDouble() < 0.28) {
+            return baseMovement * 2;
+        }
+        return baseMovement;
     }
     
     @Override

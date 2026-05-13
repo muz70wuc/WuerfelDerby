@@ -1,6 +1,14 @@
-package wuwa.cheat;
+package wuwa.cheat.game;
 
 import java.util.*;
+import wuwa.cheat.characters.*;
+import wuwa.cheat.characters.original.Abbowser;
+import wuwa.cheat.characters.original.Carthethyia;
+import wuwa.cheat.characters.original.LuukHerssen;
+import wuwa.cheat.characters.original.Person;
+import wuwa.cheat.characters.original.Sigrika;
+import wuwa.cheat.board.Position;
+import wuwa.cheat.board.ProbabilityDice;
 
 /**
  * Würfelderby: Ein Rennspiel mit 32 Feldern und 7 verschiedenen Charakteren mit speziellen Fähigkeiten.

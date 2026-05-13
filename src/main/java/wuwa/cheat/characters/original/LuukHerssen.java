@@ -1,6 +1,8 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.Random;
+import wuwa.cheat.board.Position;
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Luuk Herssen: Wird ein Vorschubmechanismus ausgelöst, +2 Felder extra.

@@ -1,6 +1,8 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.Random;
+
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Hiyuki: Trifft dieser Würfel auf Abbowser, bewegt er sich bei jeder weiteren

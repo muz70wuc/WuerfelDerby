@@ -1,4 +1,6 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
+
+import wuwa.cheat.game.WuerfelDerby;
 
 public class Mornye extends Person {
     private int sequenceIndex = 0;  // Track die Position in der Würfelsequenz

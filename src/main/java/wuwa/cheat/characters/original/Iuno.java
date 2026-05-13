@@ -1,14 +1,18 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import wuwa.cheat.characters.abilities.OncePerGame;
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Iuno: Einmal pro Spiel - wenn der Würfel die Streckenmitte passiert und sich andere Würfel
  * (mit Ausnahme des Abbowser-Würfels) sowohl vor als auch hinter ihm befinden,
  * werden diese auf sein Feld teleportiert. Die Stapelreihenfolge bleibt wie die Platzierung vor dem Teleport.
+ * Implementiert OncePerGame
  */
-public class Iuno extends Person {
+public class Iuno extends Person implements OncePerGame {
     private boolean teleportationUsed = false;
     
     public Iuno() {
@@ -56,5 +60,15 @@ public class Iuno extends Person {
     @Override
     public void onTimeRift(WuerfelDerby game) {
         // Keine speziellen Effekte beim Raumzeitriss
+    }
+    
+    @Override
+    public boolean hasAbilityBeenUsed() {
+        return teleportationUsed;
+    }
+    
+    @Override
+    public void markAbilityAsUsed() {
+        this.teleportationUsed = true;
     }
 }

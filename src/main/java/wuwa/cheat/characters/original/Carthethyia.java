@@ -1,12 +1,16 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.Random;
+
+import wuwa.cheat.characters.abilities.OncePerRound;
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Carthethyia: Wenn er sich auf Position 32 befindet, 60% Chance +2 Felder weiter.
  * Einmal pro Runde auslösbar.
+ * Implementiert OncePerRound
  */
-public class Carthethyia extends Person {
+public class Carthethyia extends Person implements OncePerRound {
     private boolean abilityUsedThisRound;
     
     public Carthethyia() {
@@ -32,6 +36,11 @@ public class Carthethyia extends Person {
     }
     
     public void resetAbility() {
+        abilityUsedThisRound = false;
+    }
+    
+    @Override
+    public void resetRoundAbility() {
         abilityUsedThisRound = false;
     }
     

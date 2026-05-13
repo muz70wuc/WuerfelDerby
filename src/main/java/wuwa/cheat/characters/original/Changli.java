@@ -1,10 +1,14 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
+
+import wuwa.cheat.characters.abilities.ActOrderModifier;
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Changli: Wenn ein anderer Würfel darunten liegt (auf Changli), besteht eine 65% Chance,
  * sich im nächsten Zug zuletzt zu bewegen.
+ * Implementiert ActOrderModifier
  */
-public class Changli extends Person {
+public class Changli extends Person implements ActOrderModifier {
     private boolean shouldActLast = false;
     
     public Changli() {
@@ -38,5 +42,10 @@ public class Changli extends Person {
     
     public boolean shouldActLast() {
         return this.shouldActLast;
+    }
+    
+    @Override
+    public boolean shouldSkipTurn() {
+        return false;  // Changli setzt nicht aus
     }
 }

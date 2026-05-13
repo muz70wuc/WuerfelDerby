@@ -2,6 +2,9 @@ package wuwa.cheat;
 
 import java.util.*;
 
+import wuwa.cheat.characters.original.*;
+import wuwa.cheat.game.WuerfelDerby;
+
 public class Main {
     private static final int SIMULATION_COUNT = 10000;
     

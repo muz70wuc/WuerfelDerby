@@ -1,6 +1,13 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
-public class Aemeath extends Person {
+import wuwa.cheat.characters.abilities.OncePerGame;
+import wuwa.cheat.game.WuerfelDerby;
+
+/**
+ * Aemeath: Einmal pro Spiel - wenn die Mitte erreicht und ein anderer Würfel vor ihm ist.
+ * Implementiert OncePerGame
+ */
+public class Aemeath extends Person implements OncePerGame {
     private boolean teleportationUsed = false;  // Track, ob die Teleportation bereits verwendet wurde
     
     public Aemeath() {
@@ -31,4 +38,13 @@ public class Aemeath extends Person {
         // Keine speziellen Effekte beim Raumzeitriss
     }
     
+    @Override
+    public boolean hasAbilityBeenUsed() {
+        return teleportationUsed;
+    }
+    
+    @Override
+    public void markAbilityAsUsed() {
+        this.teleportationUsed = true;
+    }
 }

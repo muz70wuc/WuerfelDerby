@@ -1,6 +1,8 @@
-package wuwa.cheat;
+package wuwa.cheat.characters.original;
 
 import java.util.Random;
+
+import wuwa.cheat.game.WuerfelDerby;
 
 /**
  * Phoebe: 50% Chance, ein zusätzliches Feld vorzurücken
