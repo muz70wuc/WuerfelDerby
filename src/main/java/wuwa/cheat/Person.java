@@ -12,6 +12,7 @@ public abstract class Person {
     protected List<Person> personsBelow;  // Personen, auf denen ich stehe
     protected int lastDiceRoll;  // Letzter Würfelwurf
     protected boolean isAbbowser;  // Spezialfall Abbowser
+    protected Random random;  // Random für speziale Fähigkeiten
     
     public Person(String name) {
         this.name = name;
@@ -82,6 +83,10 @@ public abstract class Person {
     
     public void setLastDiceRoll(int roll) {
         this.lastDiceRoll = roll;
+    }
+    
+    public void setRandom(Random random) {
+        this.random = random;
     }
     
     // Spezialfähigkeit: wird von jeder Unterklasse überschrieben

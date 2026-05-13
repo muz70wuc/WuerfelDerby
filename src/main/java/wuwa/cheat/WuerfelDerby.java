@@ -37,16 +37,19 @@ public class WuerfelDerby {
     }
     
     private void initializeBoard() {
-        // Definiere die 8 Spezialfelder
-        int[] specialFields = {3, 8, 15, 23, 30, 5, 18, 27};
+        // Definiere die Spezialfelder
+        // Vorschubmechanismus: 3, 11, 16, 23
+        // Hemmmechanismus: 10, 28
+        // Raumzeitriss: 6, 20
+        int[] specialFields = {3, 11, 16, 23, 10, 28, 6, 20};
         Position.FieldProperty[] properties = {
             Position.FieldProperty.VORSCHUBMECHANISMUS,
+            Position.FieldProperty.VORSCHUBMECHANISMUS,
+            Position.FieldProperty.VORSCHUBMECHANISMUS,
+            Position.FieldProperty.VORSCHUBMECHANISMUS,
+            Position.FieldProperty.HEMMMECHANISMUS,
             Position.FieldProperty.HEMMMECHANISMUS,
             Position.FieldProperty.RAUMZEITRISS,
-            Position.FieldProperty.VORSCHUBMECHANISMUS,
-            Position.FieldProperty.RAUMZEITRISS,
-            Position.FieldProperty.HEMMMECHANISMUS,
-            Position.FieldProperty.VORSCHUBMECHANISMUS,
             Position.FieldProperty.RAUMZEITRISS
         };
         
@@ -64,6 +67,7 @@ public class WuerfelDerby {
     
     public void addCharacter(Person person) {
         allCharacters.add(person);
+        person.setRandom(random);
         if (person instanceof Abbowser) {
             this.abbowser = (Abbowser) person;
         }
@@ -76,6 +80,7 @@ public class WuerfelDerby {
      */
     public void addCharacterAtStart(Person person, boolean randomizeVerticalLevel) {
         allCharacters.add(person);
+        person.setRandom(random);
         
         if (randomizeVerticalLevel) {
             // Zufälliger verticalLevel (0 bis Anzahl der Charaktere - 1)
@@ -100,6 +105,7 @@ public class WuerfelDerby {
      */
     public void addCharacter(Person person, int fieldNumber, int verticalLevel) {
         allCharacters.add(person);
+        person.setRandom(random);
         
         // Exakte Position setzen
         person.setStartPosition(fieldNumber, verticalLevel);

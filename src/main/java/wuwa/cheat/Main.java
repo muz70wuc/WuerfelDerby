@@ -14,7 +14,7 @@ public class Main {
         Map<String, List<Integer>> positions = new HashMap<>();
         Map<String, Integer> totalGames = new HashMap<>();
         
-        String[] characterNames = {"Chisa", "Mornye", "Lynae", "Aemeath", "Shorekeeper", "Carlotta", "Abbowser"};
+        String[] characterNames = {"Chisa", "Mornye", "Lynae", "Aemeath", "Shorekeeper", "Carlotta", "Abbowser", "Augusta", "Iuno", "Phrolova", "Changli", "Jinhsi", "Calcharo"};
         for (String name : characterNames) {
             winCounts.put(name, 0);
             positions.put(name, new ArrayList<>());
@@ -35,6 +35,14 @@ public class Main {
             game.addCharacterAtStart(new Shorekeeper(), true);
             game.addCharacterAtStart(new Carlotta(), true);
             game.addCharacterAtStart(new Abbowser(), true);
+            
+            // Neue Charaktere:
+            game.addCharacterAtStart(new Augusta(), true);
+            game.addCharacterAtStart(new Iuno(), true);
+            game.addCharacterAtStart(new Phrolova(), true);
+            game.addCharacterAtStart(new Changli(), true);
+            game.addCharacterAtStart(new Jinhsi(), true);
+            game.addCharacterAtStart(new Calcharo(), true);
             
             // Option 2: Spezifische Positionen setzen (Beispiele):
             // game.addCharacter(new Phoebe(), 1, 0);      // Feld 1, Level 0 (auf dem Boden)
