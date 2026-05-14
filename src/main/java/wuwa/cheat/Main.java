@@ -6,7 +6,7 @@ import wuwa.cheat.characters.original.*;
 import wuwa.cheat.game.WuerfelDerby;
 
 public class Main {
-    private static final int SIMULATION_COUNT = 10000;
+    private static final int SIMULATION_COUNT = 100000;
     
     public static void main(String[] args) {
         System.out.println("=== Würfelderby Probability Counter ===");
@@ -17,40 +17,36 @@ public class Main {
         Map<String, List<Integer>> positions = new HashMap<>();
         Map<String, Integer> totalGames = new HashMap<>();
         
-        String[] characterNames = {"Chisa", "Mornye", "Lynae", "Aemeath", "Shorekeeper", "Carlotta", "Abbowser", "Augusta", "Iuno", "Phrolova", "Changli", "Jinhsi", "Calcharo"};
+        // Charaktere hinzufügen: Einfach richtige Namen der Klassen verwenden, die in "wuwa.cheat.characters.original" definiert sind!!!
+        String[] characterNames = {"Abbowser", "Chisa", "Lynae", "Shorekeeper", "Aemeath", "Carlotta","Mornye"};
         for (String name : characterNames) {
             winCounts.put(name, 0);
             positions.put(name, new ArrayList<>());
             totalGames.put(name, 0);
         }
-        
+        String basePackage = "wuwa.cheat.characters.original.";
+    
         // Führe Simulationen durch
         for (int sim = 0; sim < SIMULATION_COUNT; sim++) {
             WuerfelDerby game = new WuerfelDerby(sim);
-            
-            // Charaktere hinzufügen
-            // Option 1: Am Startfeld (Feld 1) mit zufälligem Stack-Platz
-            // wichtig: characterNames müssen mit den tatsächlichen Charakterklassen übereinstimmen!!!
-            game.addCharacterAtStart(new Chisa(), true);
-            game.addCharacterAtStart(new Mornye(), true);
-            game.addCharacterAtStart(new Lynae(), true);
-            game.addCharacterAtStart(new Aemeath(), true);
-            game.addCharacterAtStart(new Shorekeeper(), true);
-            game.addCharacterAtStart(new Carlotta(), true);
-            game.addCharacterAtStart(new Abbowser(), true);
-            
-            // Neue Charaktere:
-            game.addCharacterAtStart(new Augusta(), true);
-            game.addCharacterAtStart(new Iuno(), true);
-            game.addCharacterAtStart(new Phrolova(), true);
-            game.addCharacterAtStart(new Changli(), true);
-            game.addCharacterAtStart(new Jinhsi(), true);
-            game.addCharacterAtStart(new Calcharo(), true);
-            
+
+            for (String name : characterNames) {
+                try {
+                    Class<?> clazz = Class.forName(basePackage + name);
+                    Person character = (Person) clazz.getDeclaredConstructor().newInstance();
+                    // Option 1: Am Startfeld (Feld 1) mit zufälligem Stack-Platz
+                    game.addCharacterAtStart(character, true);
+                } catch (Exception e) {
+                    System.err.println("Fehler beim Laden von Charakter: " + name);
+                    e.printStackTrace();
+                }
+            }
+
             // Option 2: Spezifische Positionen setzen (Beispiele):
-            // game.addCharacter(new Phoebe(), 1, 0);      // Feld 1, Level 0 (auf dem Boden)
-            // game.addCharacter(new Sigrika(), 1, 1);     // Feld 1, Level 1 (auf Phoebe)
-            // game.addCharacter(new Hiyuki(), 2, 0);      // Feld 2, Level 0
+                    // game.addCharacter(new Phoebe(), 1, 0);      // Feld 1, Level 0 (auf dem Boden)
+                    // game.addCharacter(new Sigrika(), 1, 1);     // Feld 1, Level 1 (auf Phoebe)
+                    // game.addCharacter(new Hiyuki(), 2, 0);      // Feld 2, Level 0
+            
             
             // Stapel organisieren (sortiert alle nach verticalLevel)
             game.organizeStack();
