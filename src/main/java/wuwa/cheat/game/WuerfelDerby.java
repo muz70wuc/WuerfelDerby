@@ -92,8 +92,8 @@ public class WuerfelDerby {
         
         if (randomizeVerticalLevel) {
             // Zufälliger verticalLevel (0 bis Anzahl der Charaktere - 1)
-            int maxLevel = allCharacters.size() - 1;
-            int randomLevel = random.nextInt(Math.max(1, maxLevel));
+            // Bei 7 Charakteren: Level 0-6 (der unterste trägt alle oben)
+            int randomLevel = random.nextInt(allCharacters.size());
             person.setStartPosition(1, randomLevel);
         } else {
             person.setStartPosition(1, 0);

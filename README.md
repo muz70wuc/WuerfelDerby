@@ -34,7 +34,7 @@ Das Würfelderby ist ein Rennspiel über ein 32-Feld-Spielbrett, bei dem:
 
 ### Neue Charaktere hinzufügen
 
-Um neue Charaktere zum Spiel hinzuzufügen, erstelle eine neue Klasse, die von `Person` erbt:
+Um neue Charaktere zum Spiel hinzuzufügen, erstelle eine neue Klasse in `src/main/java/wuwa/cheat/characters/original/`, die von `Person` erbt:
 
 ```java
 public class MeinCharakter extends Person {
@@ -49,77 +49,44 @@ public class MeinCharakter extends Person {
 }
 ```
 
-Danach kann der Charakter wie jeder andere zum Spiel hinzugefügt werden:
+Danach kann der Charakter in `Main.java` zur `characterNames`-Liste hinzugefügt werden.
 
-```java
-game.addCharacterAtStart(new MeinCharakter(), true);
-```
+### Vorhandene Charaktere (7 Charaktere)
 
-### Vorhandene Charaktere
-
-#### Originalcharaktere
-
-### 🎭 Abbowser (der Antagonist)
+#### 🎯 Abbowser (der Antagonist)
 - **Besonderheit**: Bewegt sich rückwärts (ab Runde 3!)
 - **Start**: Feld 32 (das Ziel)
 - **Spezial**: Kann sich teleportieren, wenn allein
 - **Rolle**: Verhindert, dass andere einfach vorbeigehen
+- **Stack-Verhalten**: Trägt wie alle anderen beim Stapeln
 
-### 🌙 Phoebe
-- **Fähigkeit**: 50% Chance für +1 zusätzliches Feld pro Zug
-- **Strategie**: Konstant und verlässlich mit guter Zusatzchance
-
-### 🔮 Sigrika
-- **Fähigkeit**: Nach jeder Runde (ab Runde 2) markiert sie bis zu 2 Charaktere auf ihrem Feld
-- **Effekt**: Markierte Charaktere bewegen sich -1 Feld (min. 1 Feld)
-- **Strategie**: Kontrolle durch Markierung der Konkurrenten
-
-### ❄️ Hiyuki
-- **Fähigkeit**: Wenn sie Abbowser trifft, erhält sie permanent +1 Feld pro Zug
-- **Strategie**: Abhängig von der Begegnung mit Abbowser, wird dann sehr stark
-
-### 💪 Carthethyia
-- **Fähigkeit**: 60% Chance für +2 Felder, wenn auf Position 32
-- **Effekt**: Nur 1x pro Runde auslösbar
-- **Strategie**: Explosive Power in entscheidender Nähe zum Ziel
-
-### 🧬 Denia
-- **Fähigkeit**: Wenn die gleiche Augenzahl wie beim letzten Wurf erzielt wird: +2 Felder
-- **Strategie**: Glücksspiel basiert auf Wiederholung
-
-### ⚙️ Luuk Herssen
-- **Fähigkeit**: Profitiert von Feldeffekten
-  - Vorschubmechanismus: +2 Felder (statt +1)
-  - Hemmmechanismus: -1 Feld (statt normal)
-- **Strategie**: Spezialist für Feldinteraktionen
-
-### 📖 Aemeath
-- **Fähigkeit**: Einmal pro Spiel - Teleportation auf den Stapel des nächsten Charakters
-- **Bedingung**: Ab Feldmitte (Feld 16+) und wenn ein anderer Charakter vor ihm ist
-- **Strategie**: Taktischer Sprung nach vorne in der Spielmitte
-
-### 🎪 Carlotta
-- **Fähigkeit**: 28% Chance, die Bewegung zu verdoppeln
-- **Strategie**: Moderate Boosts mit guter Erfolgsrate
-
-### 🎯 Chisa
+#### 🌙 Chisa
 - **Fähigkeit**: +2 Felder, wenn die kleinste Würfelzahl der Runde gewürfelt wird
 - **Strategie**: Profit aus der Schwäche wird zur Stärke
 
-### 🎲 Lynae
+#### 🎲 Lynae
 - **Fähigkeit**: Unterschiedliche Chancen pro Zug:
   - 60% Chance für doppelte Bewegung
   - 20% Chance für keine Bewegung
   - 20% Chance für normale Bewegung
 - **Strategie**: Hochriskant mit großem Upside-Potenzial
 
-### 🔢 Mornye
-- **Fähigkeit**: Feste Bewegungsabfolge (3 → 2 → 1 → 3 → 2 → 1 ...)
-- **Strategie**: Vorhersehbar und konsistent, nicht vom Glück abhängig
-
-### 🌊 Shorekeeper
+#### 🌊 Shorekeeper
 - **Fähigkeit**: Würfelt immer 2 oder 3 (50/50 Chance)
 - **Strategie**: Zuverlässig, mittelmäßig, stabil
+
+#### 📖 Aemeath
+- **Fähigkeit**: Einmal pro Spiel - Teleportation auf den Stapel des nächsten Charakters
+- **Bedingung**: Ab Feldmitte (Feld 16+) und wenn ein anderer Charakter vor ihm ist
+- **Strategie**: Taktischer Sprung nach vorne in der Spielmitte
+
+#### 🎪 Carlotta
+- **Fähigkeit**: 28% Chance, die Bewegung zu verdoppeln
+- **Strategie**: Moderate Boosts mit guter Erfolgsrate
+
+#### 🔢 Mornye
+- **Fähigkeit**: Feste Bewegungsabfolge (3 → 2 → 1 → 3 → 2 → 1 ...)
+- **Strategie**: Vorhersehbar und konsistent, nicht vom Glück abhängig
 
 ---
 
@@ -142,10 +109,12 @@ Runde 2+: Normale Runden
 - Mehrere Charaktere können auf dem gleichen Feld sein
 - Sie werden vertikal übereinander gestapelt
 - **verticalLevel**:
-  - `0` = auf dem Boden
+  - `0` = auf dem Boden (trägt alle anderen mit!)
   - `1` = auf einem anderen Charakter
   - `2+` = auf mehreren Charakteren
-- Wichtig: **Der unten stehende trägt die oben stehenden mit!**
+  - Bei 7 Charakteren: Level kann 0 bis 6 sein
+- Wichtig: **Der unten stehende (Level 0) trägt alle oben stehenden mit!**
+- Wenn Level 0 vorwärts geht, gehen Level 1, 2, 3... automatisch mit
 
 ### 3. **Siegbedingung**
 - Erster Charakter (außer Abbowser) auf Feld 32 = **Gewinner**
@@ -159,16 +128,16 @@ Das 32-Feld-Spielbrett hat 8 Spezialfelder:
 
 | Feld | Typ | Effekt |
 |------|-----|--------|
-| 3 | Vorschubmechanismus | +1 Feld (Luuk: +2) |
-| 5 | Hemmmechanismus | -1 Feld |
-| 8 | Hemmmechanismus | -1 Feld |
-| 15 | Raumzeitriss | Charakter wird neu gestapelt |
-| 18 | Vorschubmechanismus | +1 Feld (Luuk: +2) |
-| 23 | Vorschubmechanismus | +1 Feld (Luuk: +2) |
-| 27 | Raumzeitriss | Charakter wird neu gestapelt |
-| 30 | Raumzeitriss | Charakter wird neu gestapelt |
+| 3 | Vorschubmechanismus | +1 Feld (Luuk Herssen: +2) |
+| 6 | Raumzeitriss | Charakter wird neu gestapelt |
+| 10 | Hemmmechanismus | -1 Feld |
+| 11 | Vorschubmechanismus | +1 Feld (Luuk Herssen: +2) |
+| 16 | Vorschubmechanismus | +1 Feld (Luuk Herssen: +2) |
+| 20 | Raumzeitriss | Charakter wird neu gestapelt |
+| 23 | Vorschubmechanismus | +1 Feld (Luuk Herssen: +2) |
+| 28 | Hemmmechanismus | -1 Feld |
 
-### Raumzeitriss (Feld 15, 27, 30)
+### Raumzeitriss (Feld 6, 20)
 - Auslöser für Neustapelung
 - Charakter wird aus dem aktuellen Stack genommen
 - Neu gestapelt je nach `onTimeRift()`-Implementierung
@@ -208,20 +177,66 @@ java -cp build/classes/java/main wuwa.cheat.Main
 
 ## Verwendung
 
-### Basis-Simulation (Zufällige Anfangspositionen)
+### Basis-Simulation (OPTION 1: Zufällige Anfangspositionen) - Standard
+
+Dies ist die Standardkonfiguration in `Main.java`:
+
+```java
+String[] characterNames = {"Abbowser", "Chisa", "Lynae", "Shorekeeper", "Aemeath", "Carlotta","Mornye"};
+WuerfelDerby game = new WuerfelDerby(seed);
+
+// Charaktere am Startfeld (Feld 1) mit zufälligem Stack-Platz (Level 0 bis 6)
+// Der unterste Charakter (Level 0) trägt alle anderen!
+for (String name : characterNames) {
+    Class<?> clazz = Class.forName("wuwa.cheat.characters.original." + name);
+    Person character = (Person) clazz.getDeclaredConstructor().newInstance();
+    game.addCharacterAtStart(character, true);
+}
+
+game.organizeStack();
+Person winner = game.playToCompletion();
+```
+
+### OPTION 2: Spezifische Positionen mit Reflection
+
+Um Option 2 zu nutzen, kommentieren Sie die Schleife in Option 1 aus und aktivieren Sie:
 
 ```java
 WuerfelDerby game = new WuerfelDerby(seed);
 
-// Charaktere am Startfeld (Feld 1) mit zufälligem Stack-Platz
-game.addCharacterAtStart(new Phoebe(), true);
-game.addCharacterAtStart(new Sigrika(), true);
-// ... weitere Charaktere
+try {
+    // Beispiel: Alle 7 Charaktere auf Feld 1, gestapelt (Level 0-6)
+    for (int i = 0; i < characterNames.length; i++) {
+        game.addCharacter(
+            (Person) Class.forName(basePackage + characterNames[i])
+            .getDeclaredConstructor()
+            .newInstance(), 1, i);  // Feld 1, Level 0-6
+    }
+} catch (Exception e) {
+    e.printStackTrace();
+}
 
-// Stack organisieren
 game.organizeStack();
+Person winner = game.playToCompletion();
+```
 
-// Spiel bis zum Gewinn spielen
+### OPTION 3: Direkte Objektinstanziierung
+
+Um Option 3 zu nutzen, kommentieren Sie die Schleife in Option 1 aus und aktivieren Sie:
+
+```java
+WuerfelDerby game = new WuerfelDerby(seed);
+
+// Beispiel: Alle 7 Charaktere auf Feld 1, Level 0-6 gestapelt
+game.addCharacter(new Abbowser(), 1, 0);       // Feld 1, Level 0 (auf dem Boden - trägt alle anderen!)
+game.addCharacter(new Chisa(), 1, 1);         // Feld 1, Level 1 (auf Abbowser)
+game.addCharacter(new Lynae(), 1, 2);         // Feld 1, Level 2
+game.addCharacter(new Shorekeeper(), 1, 3);   // Feld 1, Level 3
+game.addCharacter(new Aemeath(), 1, 4);       // Feld 1, Level 4
+game.addCharacter(new Carlotta(), 1, 5);      // Feld 1, Level 5
+game.addCharacter(new Mornye(), 1, 6);        // Feld 1, Level 6 (ganz oben)
+
+game.organizeStack();
 Person winner = game.playToCompletion();
 ```
 
@@ -230,25 +245,25 @@ Person winner = game.playToCompletion();
 ```java
 WuerfelDerby game = new WuerfelDerby(seed);
 
-// Direktes Platzieren auf beliebigen Feldern
-game.addCharacter(new Phoebe(), 1, 0);      // Feld 1, auf dem Boden
-game.addCharacter(new Sigrika(), 1, 1);     // Feld 1, auf Phoebe (Stapel!)
-game.addCharacter(new Hiyuki(), 2, 0);      // Feld 2, auf dem Boden
-game.addCharacter(new Carthethyia(), 5, 0);
+// Charaktere auf verschiedenen Feldern und Levels
+game.addCharacter(new Abbowser(), 1, 0);      // Feld 1, auf dem Boden
+game.addCharacter(new Chisa(), 1, 1);         // Feld 1, auf Abbowser (Stapel!)
+game.addCharacter(new Lynae(), 2, 0);         // Feld 2, auf dem Boden
+game.addCharacter(new Shorekeeper(), 5, 0);   // Feld 5, auf dem Boden
 
 game.organizeStack();
 Person winner = game.playToCompletion();
 ```
 
-### Individuelle Positionen Ändern
+### Individuelle Positionen ändern
 
 ```java
-Person phoebe = new Phoebe();
-game.addCharacter(phoebe);
+Person chisa = new Chisa();
+game.addCharacter(chisa);
 
 // Position ändern (z.B. nach der Initialisierung)
-phoebe.setPosition(5);           // Auf Feld 5 setzen
-phoebe.setVerticalPosition(2);   // Ebene 2 im Stack
+chisa.setPosition(5);           // Auf Feld 5 setzen
+chisa.setVerticalPosition(2);   // Ebene 2 im Stack
 ```
 
 ---
@@ -256,26 +271,28 @@ phoebe.setVerticalPosition(2);   // Ebene 2 im Stack
 ## Anfangspositionen
 
 ### addCharacterAtStart(Person, boolean randomizeVerticalLevel)
-- `randomizeVerticalLevel = true`: Zufälliger Stack-Platz (Ebene 0 bis Charakteranzahl-1)
+- `randomizeVerticalLevel = true`: Zufälliger Stack-Platz (Ebene 0 bis Anzahl Charaktere - 1)
+  - Bei 7 Charakteren: Level 0-6
 - `randomizeVerticalLevel = false`: Immer auf dem Boden (Ebene 0)
 
 ```java
 // Alle auf Feld 1, zufälliger Stapel
-game.addCharacterAtStart(new Phoebe(), true);
-game.addCharacterAtStart(new Sigrika(), true);
+game.addCharacterAtStart(new Abbowser(), true);
+game.addCharacterAtStart(new Chisa(), true);
 
 // Alle auf Feld 1, auf dem Boden
-game.addCharacterAtStart(new Denia(), false);
+game.addCharacterAtStart(new Lynae(), false);
 ```
 
 ### addCharacter(Person, int fieldNumber, int verticalLevel)
 - **fieldNumber**: 1-32
-- **verticalLevel**: 0 = Boden, 1+ = gestapelt auf anderen
+- **verticalLevel**: 0 = Boden (trägt alle oben), 1+ = gestapelt auf anderen
+  - Bei 7 Charakteren: Level kann 0 bis 6 sein
 
 ```java
-game.addCharacter(new Phoebe(), 1, 0);   // Feld 1, Level 0
-game.addCharacter(new Sigrika(), 1, 1);  // Feld 1, Level 1 (auf Phoebe)
-game.addCharacter(new Hiyuki(), 10, 0);  // Feld 10, Level 0
+game.addCharacter(new Abbowser(), 1, 0);   // Feld 1, Level 0 (trägt alle!)
+game.addCharacter(new Chisa(), 1, 1);      // Feld 1, Level 1 (auf Abbowser)
+game.addCharacter(new Lynae(), 10, 0);     // Feld 10, Level 0
 ```
 
 ---
@@ -346,18 +363,29 @@ game.printGameState();  // Ergebnis anschauen
 
 ```
 src/main/java/wuwa/cheat/
-├── Main.java              # Simulationsprogramm
-├── WuerfelDerby.java      # Hauptspiel-Engine
-├── Person.java            # Basis-Klasse für Charaktere
-├── Position.java          # Felddefinitionen
-├── ProbabilityDice.java   # Würfel-Simulator
-├── Phoebe.java            # Charakter
-├── Sigrika.java           # Charakter
-├── Hiyuki.java            # Charakter
-├── Carthethyia.java       # Charakter
-├── Denia.java             # Charakter
-├── LuukHerssen.java       # Charakter
-└── Abbowser.java          # Charakter (Antagonist)
+├── Main.java              # Simulationsprogramm (Haupteinstiegspunkt)
+├── STRUCTURE.md           # Dokumentation der Klassenstruktur
+├── board/
+│   ├── Position.java      # Felddefinitionen und Feldtypen
+│   └── ProbabilityDice.java   # Würfel-Simulator
+├── characters/
+│   ├── original/          # Alle 7 Charaktere
+│   │   ├── Person.java              # Basis-Klasse für alle Charaktere
+│   │   ├── Abbowser.java            # Antagonist (rückwärts)
+│   │   ├── Chisa.java               # +2 bei kleinster Würfelzahl
+│   │   ├── Lynae.java               # Hochriskant (60%/20%/20%)
+│   │   ├── Shorekeeper.java         # Würfelt 2 oder 3
+│   │   ├── Aemeath.java             # Teleportation einmal pro Spiel
+│   │   ├── Carlotta.java            # 28% Verdopplung
+│   │   └── Mornye.java              # Feste Abfolge 3→2→1
+│   └── abilities/         # Modifier-Interfaces
+│       ├── ActOrderModifier.java
+│       ├── MovementModifier.java
+│       ├── OncePerGame.java
+│       ├── OncePerRound.java
+│       └── StackInteractor.java
+└── game/
+    └── WuerfelDerby.java  # Hauptspiel-Engine
 ```
 
 ---

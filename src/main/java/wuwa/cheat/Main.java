@@ -30,22 +30,52 @@ public class Main {
         for (int sim = 0; sim < SIMULATION_COUNT; sim++) {
             WuerfelDerby game = new WuerfelDerby(sim);
 
+            // ===== OPTION 1: Zufällige Positionen auf Feld 1 =====
+            // Alle Charaktere auf Feld 1 mit zufälligem Stack-Platz (Level 0 bis zur Anzahl der Charaktere)
+            // Der unterste Charakter (Level 0) trägt alle anderen mit!
             for (String name : characterNames) {
                 try {
                     Class<?> clazz = Class.forName(basePackage + name);
                     Person character = (Person) clazz.getDeclaredConstructor().newInstance();
-                    // Option 1: Am Startfeld (Feld 1) mit zufälligem Stack-Platz
                     game.addCharacterAtStart(character, true);
                 } catch (Exception e) {
                     System.err.println("Fehler beim Laden von Charakter: " + name);
                     e.printStackTrace();
                 }
             }
-
-            // Option 2: Spezifische Positionen setzen (Beispiele):
-                    // game.addCharacter(new Phoebe(), 1, 0);      // Feld 1, Level 0 (auf dem Boden)
-                    // game.addCharacter(new Sigrika(), 1, 1);     // Feld 1, Level 1 (auf Phoebe)
-                    // game.addCharacter(new Hiyuki(), 2, 0);      // Feld 2, Level 0
+            
+            // ===== OPTION 2: Spezifische Positionen =====
+            // AUSKOMMENTIEREN Sie Option 1 oben UND aktivieren Sie diesen Block, wenn Sie spezifische Positionen verwenden möchten!
+            /*
+            try {
+                // Beispiel: Alle 7 Charaktere auf Feld 1, gestapelt (Level 0-6)
+                for (int i = 0; i < characterNames.length; i++) {
+                    game.addCharacter(
+                        (Person) Class.forName(basePackage + characterNames[i])
+                        .getDeclaredConstructor()
+                        .newInstance(), 1, i);  // Feld 1, Level 0-6
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            */
+            
+            // ===== OPTION 3: Direkte Objektinstanziierung =====
+            // AUSKOMMENTIEREN Sie Option 1 oben UND aktivieren Sie diesen Block, wenn Sie direkte Objekte verwenden möchten!
+            /*
+            try {
+                // Beispiel: Alle 7 Charaktere auf Feld 1, Level 0-6 gestapelt
+                game.addCharacter(new Abbowser(), 1, 0);       // Feld 1, Level 0 (auf dem Boden - trägt alle anderen!)
+                game.addCharacter(new Chisa(), 1, 1);         // Feld 1, Level 1 (auf Abbowser)
+                game.addCharacter(new Lynae(), 1, 2);         // Feld 1, Level 2
+                game.addCharacter(new Shorekeeper(), 1, 3);   // Feld 1, Level 3
+                game.addCharacter(new Aemeath(), 1, 4);       // Feld 1, Level 4
+                game.addCharacter(new Carlotta(), 1, 5);      // Feld 1, Level 5
+                game.addCharacter(new Mornye(), 1, 6);        // Feld 1, Level 6 (ganz oben)
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            */
             
             
             // Stapel organisieren (sortiert alle nach verticalLevel)
