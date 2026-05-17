@@ -18,13 +18,23 @@ public class Main {
         Map<String, Integer> totalGames = new HashMap<>();
         
         // Charaktere hinzufügen: Einfach richtige Namen der Klassen verwenden, die in "wuwa.cheat.characters.original" definiert sind!!!
-        String[] characterNames = {"Abbowser", "Chisa", "Lynae", "Shorekeeper", "Aemeath", "Carlotta","Mornye"};
-        for (String name : characterNames) {
-            winCounts.put(name, 0);
-            positions.put(name, new ArrayList<>());
-            totalGames.put(name, 0);
-        }
+        String[] characterNames = {"Abbowser","LuukHerssen","Carlotta","Hiyuki","Phoebe","Mornye","Augusta"};
         String basePackage = "wuwa.cheat.characters.original.";
+        
+        // Lade Charaktere EINMAL um echte Namen zu ermitteln und Maps korrekt zu initialisieren
+        for (String className : characterNames) {
+            try {
+                Class<?> clazz = Class.forName(basePackage + className);
+                Person character = (Person) clazz.getDeclaredConstructor().newInstance();
+                String realName = character.getName();  // Echten Namen verwenden!
+                winCounts.put(realName, 0);
+                positions.put(realName, new ArrayList<>());
+                totalGames.put(realName, 0);
+            } catch (Exception e) {
+                System.err.println("Fehler beim Laden von Charakter: " + className);
+                e.printStackTrace();
+            }
+        }
     
         // Führe Simulationen durch
         for (int sim = 0; sim < SIMULATION_COUNT; sim++) {
@@ -98,7 +108,7 @@ public class Main {
         
         // Berechne Durchschnitte
         Map<String, Double> averagePositions = new HashMap<>();
-        for (String name : characterNames) {
+        for (String name : positions.keySet()) {
             List<Integer> positionList = positions.get(name);
             double avg = positionList.stream().mapToInt(Integer::intValue).average().orElse(0);
             averagePositions.put(name, avg);
